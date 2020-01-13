@@ -1,0 +1,9 @@
+cc_library(
+    name = "core",
+    srcs = glob([
+        "td/mtproto/*.cpp",
+        "td/telegram/*.cpp",
+        "td/mtproto/*.h",
+        "td/telegram/*.hpp",
+    ]),
+)

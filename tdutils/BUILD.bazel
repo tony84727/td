@@ -1,0 +1,24 @@
+load("@rules_cmake_helper//:defs.bzl", "configure_template")
+
+configure_template(
+    name = "config_header",
+    template = "td/utils/config.h.in",
+    variables = {
+        "TD_HAVE_OPENSSL": "1",
+        "TD_HAVE_ZLIB": "1",
+    },
+)
+
+cc_library(
+    name = "tdutils",
+    srcs = glob([
+        "td/utils/port/*.cpp",
+        "td/utils/*.cpp",
+        "td/utils/detail/*.h",
+        "td/utils/*.h",
+    ]) + [
+        ":config_header",
+    ],
+    hdrs = glob(["td/utils/*.h"]),
+    strip_include_prefix= "//tdutils",
+)
